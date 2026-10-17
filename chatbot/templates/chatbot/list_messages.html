@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot</title>
+</head>
+<body>
+    {% for message in chat_messages %}
+    <div><strong>User:</strong> {{ message.user_message }}</div>
+    <div><strong>Bot:</strong> {{ message.bot_response|linebreaksbr }}</div>
+    <hr>
+    {% endfor %}
+
+    <form action="{% url 'send_message' %}" method="post">
+        {% csrf_token %}
+        <textarea name="user_message" rows="3" cols="60"></textarea><br>
+        <input type="submit" value="Send">
+    </form>
+</body>
+</html>
