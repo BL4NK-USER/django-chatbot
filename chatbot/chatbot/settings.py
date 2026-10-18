@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chatbotapp',
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,24 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+PWA_APP_NAME = "AI Chatbot"
+PWA_APP_DESCRIPTION = "Chatbot powered by Gemini"
+PWA_APP_THEME_COLOR = "#0b84ff"
+PWA_APP_BACKGROUND_COLOR = "#ffffff"
+PWA_APP_DISPLAY = "standalone"
+PWA_APP_SCOPE = "/"
+PWA_APP_START_URL = "/"
+PWA_APP_ORIENTATION = "any"
+PWA_APP_STATUS_BAR_COLOR = "default"
+PWA_APP_LANG = "en-US"
+
+PWA_APP_ICONS = [
+    {"src": "/static/img/chatbot-192.png", "sizes": "192x192"},
+    {"src": "/static/img/chatbot-512.png", "sizes": "512x512"},
+]
+PWA_APP_ICONS_APPLE = [
+    {"src": "/static/img/chatbot-192.png", "sizes": "192x192"},
+]

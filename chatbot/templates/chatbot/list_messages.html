@@ -1,7 +1,10 @@
+{% load static %}
+{% load pwa %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    {% progressive_web_app_meta %}
     <title>Chatbot</title>
     <style>
         body {
@@ -71,7 +74,7 @@
 
             <form action="{% url 'clear_messages' %}" method="post">
                 {% csrf_token %}
-                <input type="submit" value="Clear conversation">
+                <input type="submit" value="Clear Chat">
             </form>
         </div>
     </div>
