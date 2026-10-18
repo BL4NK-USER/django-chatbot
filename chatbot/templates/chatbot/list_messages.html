@@ -3,18 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 700px;
+        }
+        .message {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .message.user {
+            justify-content: flex-end;
+        }
+        .message.bot {
+            justify-content: flex-start;
+        }
+        .bubble {
+            max-width: 75%;
+            padding: 10px 14px;
+            border-radius: 16px;
+            line-height: 1.4;
+        }
+        .user .bubble {
+            background: #0b84ff;
+            color: #fff;
+        }
+        .bot .bubble {
+            background: #e9e9eb;
+            color: #000;
+        }
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 20px;
+        }
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
-    {% for message in chat_messages %}
-    <div><strong>User:</strong> {{ message.user_message }}</div>
-    <div><strong>Bot:</strong> {{ message.bot_response|linebreaksbr }}</div>
-    <hr>
-    {% endfor %}
+    <div class="chat-container">
+        {% for message in chat_messages %}
+        <div class="message user">
+            <div class="bubble">{{ message.user_message|linebreaksbr }}</div>
+        </div>
+        <div class="message bot">
+            <div class="bubble">{{ message.bot_response|linebreaksbr }}</div>
+        </div>
+        {% endfor %}
 
-    <form action="{% url 'send_message' %}" method="post">
-        {% csrf_token %}
-        <textarea name="user_message" rows="3" cols="60"></textarea><br>
-        <input type="submit" value="Send">
-    </form>
+        <div class="controls">
+            <form action="{% url 'send_message' %}" method="post">
+                {% csrf_token %}
+                <textarea name="user_message" rows="3"></textarea><br>
+                <input type="submit" value="Send">
+            </form>
+
+            <form action="{% url 'clear_messages' %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Clear conversation">
+            </form>
+        </div>
+    </div>
 </body>
 </html>

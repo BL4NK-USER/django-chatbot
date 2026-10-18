@@ -7,6 +7,10 @@ from .models import ChatMessage
 client = genai.Client(api_key=settings.GEMINI_API_KEY)
 MODEL_NAME = "gemini-3.8-flash"
 
+def clear_messages(request):
+    if request.method == "POST":
+        ChatMessage.objects.all().delete()
+    return redirect("list_messages")
 
 def send_message(request):
     if request.method == "POST":
